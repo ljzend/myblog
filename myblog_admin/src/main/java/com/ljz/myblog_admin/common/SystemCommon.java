@@ -8,7 +8,13 @@ package com.ljz.myblog_admin.common;
  */
 
 public class SystemCommon {
+    /**
+     * 返回 token 中的 map 的 key
+     */
     public static final String TOKEN = "token";
-    public static final String TOKENHEAD = "tokenHead";
 
+    /**
+     * redis 中的存储 登录用户的 menu 的 key 前缀
+     */
+    public static final String REDIS_MENU_PREFIX = "cache:menu:";
 }

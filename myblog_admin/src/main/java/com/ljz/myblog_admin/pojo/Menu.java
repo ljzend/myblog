@@ -57,6 +57,10 @@ public class Menu implements Serializable {
     @TableField("authority")
     private String authority;
 
+    @ApiModelProperty("菜单类型（0菜单，1按钮）")
+    @TableField("menu_type")
+    private Boolean menuType;
+
     @ApiModelProperty("排序")
     @TableField("sort")
     private Integer sort;
@@ -64,6 +68,10 @@ public class Menu implements Serializable {
     @ApiModelProperty("创建时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;
+
+    @ApiModelProperty("创建者")
+    @TableField(value = "create_by")
+    private String createBy;
 
     @ApiModelProperty("更新时间")
     @TableField(value = "modify_time", fill = FieldFill.INSERT_UPDATE)
@@ -149,6 +157,14 @@ public class Menu implements Serializable {
         this.authority = authority;
     }
 
+    public Boolean getMenuType() {
+        return menuType;
+    }
+
+    public void setMenuType(Boolean menuType) {
+        this.menuType = menuType;
+    }
+
     public Integer getSort() {
         return sort;
     }
@@ -163,6 +179,14 @@ public class Menu implements Serializable {
 
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
     }
 
     public LocalDateTime getModifyTime() {
@@ -193,8 +217,10 @@ public class Menu implements Serializable {
                 ", name='" + name + '\'' +
                 ", component='" + component + '\'' +
                 ", authority='" + authority + '\'' +
+                ", menuType=" + menuType +
                 ", sort=" + sort +
                 ", createTime=" + createTime +
+                ", createBy='" + createBy + '\'' +
                 ", modifyTime=" + modifyTime +
                 ", deleted=" + deleted +
                 '}';

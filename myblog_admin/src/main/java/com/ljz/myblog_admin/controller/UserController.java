@@ -1,7 +1,9 @@
 package com.ljz.myblog_admin.controller;
 
 import cn.hutool.core.util.StrUtil;
+import com.ljz.myblog_admin.dto.MenuDTO;
 import com.ljz.myblog_admin.pojo.User;
+import com.ljz.myblog_admin.service.MenuService;
 import com.ljz.myblog_admin.service.UserService;
 import com.ljz.myblog_admin.vo.LoginParamVo;
 import com.ljz.myblog_admin.vo.ReturnCode;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,6 +36,8 @@ public class UserController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     @Resource
     private UserService userService;
+    @Resource
+    private MenuService menuService;
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
@@ -59,6 +64,7 @@ public class UserController {
         String username = principal.getName();
         User user = userService.loadUserByUsername(username);
         user.setPassword(null);
+        user.setRoles(userService.getRoles(user.getId()));
         return user;
     }
 
@@ -66,5 +72,11 @@ public class UserController {
     @PostMapping("/logout")
     public String logout(){
         return "注销成功!";
+    }
+
+    @ApiOperation("测试")
+    @GetMapping("/test")
+    public List<MenuDTO> test(){
+        return menuService.getMenusWithRole();
     }
 }

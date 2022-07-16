@@ -38,4 +38,19 @@ public class CommonSecurityConfig {
     public RestAuthenticationEntryPoint restAuthenticationEntryPoint() {
         return new RestAuthenticationEntryPoint();
     }
+
+    @Bean
+    public DynamicSecurityMetadataSource dynamicSecurityMetadataSource() {
+        return new DynamicSecurityMetadataSource();
+    }
+
+    @Bean
+    public DynamicAccessDecisionManager dynamicAccessDecisionManager(){
+        return new DynamicAccessDecisionManager();
+    }
+
+    @Bean
+    public DynamicSecurityFilter dynamicSecurityFilter(){
+        return new DynamicSecurityFilter();
+    }
 }

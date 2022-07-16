@@ -2,6 +2,7 @@ package com.ljz.myblog_admin.service;
 
 import com.ljz.myblog_admin.dto.MenuDTO;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ljz.myblog_admin.pojo.Menu;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @author ljz
  * @since 2022-07-15 16-40-17
  */
-public interface MenuService extends IService<com.ljz.myblog_admin.pojo.Menu> {
+public interface MenuService extends IService<Menu> {
 
     /**
      * Gets menus by user id.
@@ -21,4 +22,11 @@ public interface MenuService extends IService<com.ljz.myblog_admin.pojo.Menu> {
      * @return the menus by user id
      */
     List<MenuDTO> getMenusByUserId();
+
+    /**
+     * Gets menus with role.
+     * 根据角色查询菜单列表
+     * @return the menus with role
+     */
+    List<MenuDTO> getMenusWithRole();
 }

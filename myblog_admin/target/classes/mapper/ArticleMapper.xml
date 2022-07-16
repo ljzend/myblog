@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljz.myblog_admin.mapper.ArticleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ljz.myblog_admin.pojo.Article">
+        <id column="id" property="id" />
+        <result column="summary" property="summary" />
+        <result column="title" property="title" />
+        <result column="view_count" property="viewCount" />
+        <result column="weight" property="weight" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />
+        <result column="deleted" property="deleted" />
+        <result column="category_id" property="categoryId" />
+        <result column="user_id" property="userId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, summary, title, view_count, weight, create_time, modify_time, deleted, category_id, user_id
+    </sql>
+
+</mapper>

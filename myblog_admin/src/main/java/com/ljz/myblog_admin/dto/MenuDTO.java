@@ -1,6 +1,7 @@
 package com.ljz.myblog_admin.dto;
 
 import com.ljz.myblog_admin.pojo.Menu;
+import com.ljz.myblog_admin.pojo.Role;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,8 @@ import java.util.Objects;
 public class MenuDTO extends Menu {
     private List<MenuDTO> children = new ArrayList<>();
 
+    private List<Role> roles;
+
     public List<MenuDTO> getChildren() {
         return children;
     }
@@ -25,16 +28,24 @@ public class MenuDTO extends Menu {
         this.children = children;
     }
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MenuDTO menuDTO = (MenuDTO) o;
-        return Objects.equals(children, menuDTO.children);
+        return Objects.equals(children, menuDTO.children) && Objects.equals(roles, menuDTO.roles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(children);
+        return Objects.hash(children, roles);
     }
 }

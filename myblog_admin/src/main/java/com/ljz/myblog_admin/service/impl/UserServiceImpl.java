@@ -3,6 +3,7 @@ package com.ljz.myblog_admin.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ljz.myblog_admin.mapper.UserMapper;
+import com.ljz.myblog_admin.pojo.Role;
 import com.ljz.myblog_admin.pojo.User;
 import com.ljz.myblog_admin.service.UserService;
 import com.ljz.myblog_admin.utils.JwtTokenUtil;
@@ -19,6 +20,7 @@ import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.ljz.myblog_admin.common.SystemCommon.TOKEN;
@@ -75,8 +77,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         queryWrapper.eq(User::getUsername, username).eq(User::getEnable, true).last("limit 1");
         User user = userMapper.selectOne(queryWrapper);
         if (!ObjectUtils.isEmpty(user)) {
+            user.setRoles(getRoles(user.getId()));
             return user;
         }
         return null;
+    }
+
+    @Override
+    public List<Role> getRoles(Long id) {
+        return userMapper.getRoles(id);
     }
 }

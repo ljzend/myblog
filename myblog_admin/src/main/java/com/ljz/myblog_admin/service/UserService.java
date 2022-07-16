@@ -1,8 +1,10 @@
 package com.ljz.myblog_admin.service;
 
+import com.ljz.myblog_admin.pojo.Role;
 import com.ljz.myblog_admin.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,4 +33,12 @@ public interface UserService extends IService<User> {
      * @return the user
      */
     User loadUserByUsername(String username);
+
+    /**
+     * Gets roles.
+     * 根据用户 id 获取角色
+     * @param id the id
+     * @return the roles
+     */
+    List<Role> getRoles(Long id);
 }

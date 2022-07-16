@@ -1,23 +1,21 @@
 package com.ljz.myblog_admin.pojo;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Collection;
-
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author ljz
@@ -78,9 +76,15 @@ public class User implements Serializable, UserDetails {
     @TableLogic
     private Boolean deleted;
 
+    @ApiModelProperty("角色")
+    @TableField(exist = false)
+    private List<Role> roles;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -110,6 +114,7 @@ public class User implements Serializable, UserDetails {
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getUsername() {
         return username;
     }
@@ -117,6 +122,7 @@ public class User implements Serializable, UserDetails {
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getNickname() {
         return nickname;
     }
@@ -124,6 +130,7 @@ public class User implements Serializable, UserDetails {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+
     public String getAvatar() {
         return avatar;
     }
@@ -131,6 +138,7 @@ public class User implements Serializable, UserDetails {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
     public Boolean getGender() {
         return gender;
     }
@@ -138,6 +146,7 @@ public class User implements Serializable, UserDetails {
     public void setGender(Boolean gender) {
         this.gender = gender;
     }
+
     public String getPassword() {
         return password;
     }
@@ -145,6 +154,7 @@ public class User implements Serializable, UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
+
     public Boolean getEnable() {
         return enable;
     }
@@ -152,6 +162,7 @@ public class User implements Serializable, UserDetails {
     public void setEnable(Boolean enable) {
         this.enable = enable;
     }
+
     public String getEmail() {
         return email;
     }
@@ -159,6 +170,7 @@ public class User implements Serializable, UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
+
     public String getPhone() {
         return phone;
     }
@@ -166,6 +178,7 @@ public class User implements Serializable, UserDetails {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -173,6 +186,7 @@ public class User implements Serializable, UserDetails {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
     public LocalDateTime getModifyTime() {
         return modifyTime;
     }
@@ -180,6 +194,7 @@ public class User implements Serializable, UserDetails {
     public void setModifyTime(LocalDateTime modifyTime) {
         this.modifyTime = modifyTime;
     }
+
     public Boolean getDeleted() {
         return deleted;
     }
@@ -188,21 +203,30 @@ public class User implements Serializable, UserDetails {
         this.deleted = deleted;
     }
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-            "id=" + id +
-            ", username=" + username +
-            ", nickname=" + nickname +
-            ", avatar=" + avatar +
-            ", gender=" + gender +
-            ", password=" + password +
-            ", enable=" + enable +
-            ", email=" + email +
-            ", phone=" + phone +
-            ", createTime=" + createTime +
-            ", modifyTime=" + modifyTime +
-            ", deleted=" + deleted +
-        "}";
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", gender=" + gender +
+                ", password='" + password + '\'' +
+                ", enable=" + enable +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", createTime=" + createTime +
+                ", modifyTime=" + modifyTime +
+                ", deleted=" + deleted +
+                ", roles=" + roles +
+                '}';
     }
 }

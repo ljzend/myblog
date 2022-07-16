@@ -25,4 +25,11 @@ public interface MenuMapper extends BaseMapper<com.ljz.myblog_admin.pojo.Menu> {
      * @return the menus by user id
      */
     List<MenuDTO> getMenusByUserId(Long id);
+
+    /**
+     * Gets menus with role.
+     * 根据角色查询菜单列表
+     * @return the menus with role
+     */
+    List<MenuDTO> getMenusWithRole();
 }

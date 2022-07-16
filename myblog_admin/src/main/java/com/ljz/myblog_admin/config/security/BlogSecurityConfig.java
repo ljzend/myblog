@@ -21,11 +21,12 @@ public class BlogSecurityConfig {
     @Resource
     private UserService userService;
 
-    @Bean("userDetailsService")
+    @Bean
     public UserDetailsService userDetailsService(){
         return username -> {
             User user = userService.loadUserByUsername(username);
             if(!ObjectUtils.isEmpty(user)){
+                user.setRoles(userService.getRoles(user.getId()));
                 return user;
             }
             throw new UsernameNotFoundException("用户名或密码错误");
