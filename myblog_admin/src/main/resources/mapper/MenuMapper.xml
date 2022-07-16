@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljz.myblog_admin.mapper.MenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ljz.myblog_admin.pojo.Menu">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="avatar" property="avatar"/>
+        <result column="enable" property="enable"/>
+        <result column="name" property="name"/>
+        <result column="component" property="component"/>
+        <result column="authority" property="authority"/>
+        <result column="sort" property="sort"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <resultMap id="MenuDTO" type="com.ljz.myblog_admin.dto.MenuDTO" extends="BaseResultMap">
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, parent_id, avatar, enable, name, component, authority, sort, create_time, modify_time, deleted
+    </sql>
+    <select id="getMenusByUserId" resultMap="MenuDTO" parameterType="java.lang.Long">
+        SELECT m.id,
+               m.parent_id,
+               m.url,
+               m.path,
+               m.avatar,
+               m.`enable`,
+               m.name,
+               m.component,
+               m.authority,
+               m.sort,
+               m.create_time,
+               m.modify_time,
+               m.deleted
+        FROM t_role_user ru,
+             t_role_menu rm,
+             t_menu m
+        where ru.role_id = rm.role_id
+          AND rm.menu_id = m.id
+          AND ru.id = #{id}
+    </select>
+
+</mapper>
